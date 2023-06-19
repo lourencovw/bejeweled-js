@@ -31,40 +31,58 @@ export class MoveChecker {
 
     left() {
         const currentPosition = this.color
-        
+
+        // 🟦 🟦 🟥 🟦
         if (this.thirdLeftIsWithinRange) {
-            const twoPositionsBehind = this.setup[this.row][this.column - 2]
-            const threePositionsBehind = this.setup[this.row][this.column - 3]
-            if (currentPosition === twoPositionsBehind && currentPosition === threePositionsBehind) {
-                return true
-            }
-        }
-
-        if (this.upIsWithinRange && this.secondLeftIsWithinRange) {
-            const upLeft = this.setup[this.row - 1][this.column - 1]
             const twoColumnsLeft = this.setup[this.row][this.column - 2]
-            if (currentPosition === upLeft && currentPosition === twoColumnsLeft) {
+            const threeColumnsLeft = this.setup[this.row][this.column - 3]
+            if (currentPosition === twoColumnsLeft && currentPosition === threeColumnsLeft) {
                 return true
             }
-
         }
 
-        if (this.downIsWithinRange && this.secondLeftIsWithinRange) {
+        // 🟥 🟦
+        // 🟦  
+        // 🟦
+        if (this.leftIsWithinRange && this.secondDownIsWithinRange) {
             const downLeft = this.setup[this.row + 1][this.column - 1]
-            const twoColumnsLeft = this.setup[this.row][this.column - 2]
+            const twoRowsDownOneColumnLeft = this.setup[this.row + 2][this.column - 1]
+            if (currentPosition === downLeft && currentPosition === twoRowsDownOneColumnLeft) {
+                return true
+            }
 
-            if (currentPosition === downLeft && currentPosition === twoColumnsLeft) {
+        }
+        
+        // 🟦
+        // 🟥 🟦
+        // 🟦
+        if (this.upIsWithinRange && this.leftIsWithinRange && this.downIsWithinRange) {
+            const downLeft = this.setup[this.row + 1][this.column - 1]
+            const upLeft = this.setup[this.row - 1][this.column - 1]
+
+            if (currentPosition === downLeft && currentPosition === upLeft) {
+                return true
+            }
+        }
+        
+        // 🟦
+        // 🟦
+        // 🟥 🟦
+        if (this.secondUpIsWithinRange && this.leftIsWithinRange) {
+            const twoRowsUpOneColumnLeft = this.setup[this.row - 2][this.column - 1]
+            const oneRowUpOneColumnLeft = this.setup[this.row - 1][this.column - 1]
+            if (currentPosition === twoRowsUpOneColumnLeft && currentPosition === oneRowUpOneColumnLeft) {
                 return true
             }
         }
 
         return false
-
     }
 
     right() {
         const currentPosition = this.color
         
+        // 🟦 🟥 🟦 🟦
         if (this.thirdRightIsWithinRange) {
             const twoPositionsAhead = this.setup[this.row][this.column + 2]
             const threePositionsAhead = this.setup[this.row][this.column + 3]
@@ -73,20 +91,38 @@ export class MoveChecker {
             }
         }
 
-        if (this.upIsWithinRange && this.secondRightIsWithinRange) {
-            const upRight = this.setup[this.row - 1][this.column + 1]
-            const twoColumnsRight = this.setup[this.row][this.column + 2]
-            if (currentPosition === upRight && currentPosition === twoColumnsRight) {
+        //    🟦
+        //    🟦
+        // 🟦 🟥
+        if (this.secondUpIsWithinRange && this.rightIsWithinRange) {
+            const oneRowUpOneColumnRight = this.setup[this.row - 1][this.column + 1]
+            const twoRowsUpOneColumnRight = this.setup[this.row - 2][this.column + 1]
+            if (currentPosition === oneRowUpOneColumnRight && currentPosition === twoRowsUpOneColumnRight) {
                 return true
             }
 
         }
 
-        if (this.downIsWithinRange && this.secondRightIsWithinRange) {
-            const downRight = this.setup[this.row + 1][this.column + 1]
-            const twoColumnsRight = this.setup[this.row][this.column + 2]
+        //    🟦
+        // 🟦 🟥
+        //    🟦
+        if (this.rightIsWithinRange && this.upIsWithinRange && this.downIsWithinRange) {
+            const oneRowUpOneColumnRight = this.setup[this.row - 1][this.column + 1]
+            const oneRowDownOneColumnRight = this.setup[this.row + 1][this.column + 1]
 
-            if (currentPosition === downRight && currentPosition === twoColumnsRight) {
+            if (currentPosition === oneRowUpOneColumnRight && currentPosition === oneRowDownOneColumnRight) {
+                return true
+            }
+        }
+
+        // 🟦 🟥
+        //    🟦
+        //    🟦
+        if (this.secondDownIsWithinRange && this.rightIsWithinRange) {
+            const oneRowDownOneColumnRight = this.setup[this.row + 1][this.column + 1]
+            const twoRowsDownOneColumnRight = this.setup[this.row + 2][this.column + 1]
+
+            if (currentPosition === twoRowsDownOneColumnRight && currentPosition === oneRowDownOneColumnRight) {
                 return true
             }
         }
@@ -97,67 +133,103 @@ export class MoveChecker {
     up() {
         const currentPosition = this.color
         
+        // 🟦
+        // 🟦
+        // 🟥
+        // 🟦        
         if (this.thirdUpIsWithinRange) {
-            const twoPositionsUp = this.setup[this.row - 2][this.column]
-            const threePositionsUp = this.setup[this.row - 3][this.column]
-            if (currentPosition === twoPositionsUp && currentPosition === threePositionsUp) {
+            const twoRowsUp = this.setup[this.row - 2][this.column]
+            const threeRowsUp = this.setup[this.row - 3][this.column]
+            if (currentPosition === twoRowsUp && currentPosition === threeRowsUp) {
                 return true
             }
         }
 
-        if (this.leftIsWithinRange && this.secondUpIsWithinRange) {
+        // 🟦 🟥 🟦
+        //    🟦
+        if (this.leftIsWithinRange && this.upIsWithinRange && this.rightIsWithinRange) {
             const upLeft = this.setup[this.row - 1][this.column - 1]
-            const twoPositionsUp = this.setup[this.row - 2][this.column]
-            if (currentPosition === upLeft && currentPosition === twoPositionsUp) {
-                return true
-            }
-
-        }
-
-        if (this.rightIsWithinRange && this.secondUpIsWithinRange) {
             const upRight = this.setup[this.row - 1][this.column + 1]
-            const twoPositionsUp = this.setup[this.row - 2][this.column]
+            if (currentPosition === upLeft && currentPosition === upRight) {
+                return true
+            }
 
-            if (currentPosition === upRight && currentPosition === twoPositionsUp) {
+        }
+
+        // 🟥 🟦 🟦
+        // 🟦
+        if (this.upIsWithinRange && this.secondRightIsWithinRange) {
+            const upRight = this.setup[this.row - 1][this.column + 1]
+            const oneRowUpTwoColumnsRight = this.setup[this.row - 1][this.column + 2]
+
+            if (currentPosition === upRight && currentPosition === oneRowUpTwoColumnsRight) {
                 return true
             }
         }
 
+        // 🟦 🟦 🟥
+        //        🟦
+        if (this.secondLeftIsWithinRange && this.upIsWithinRange) {
+            const upLeft = this.setup[this.row - 1][this.column - 1]
+            const oneRowUpTwoColumnsLeft = this.setup[this.row - 1][this.column - 2]
+
+            if (currentPosition === upLeft && currentPosition === oneRowUpTwoColumnsLeft) {
+                return true
+            }
+        }
 
         return false
-
     }
 
     down() {
         const currentPosition = this.color
         
+        
+        // 🟦
+        // 🟥 🟦 🟦
+        if (this.secondRightIsWithinRange && this.downIsWithinRange) {
+            const oneRowDownOneColumnRight = this.setup[this.row + 1][this.column + 1]
+            const oneRowDownTwoColumnsRight = this.setup[this.row + 1][this.column + 2]
+            if (currentPosition === oneRowDownOneColumnRight && currentPosition === oneRowDownTwoColumnsRight) {
+                return true
+            }
+        }
+
+        //      🟦
+        // 🟦   🟥  🟦
+        if (this.leftIsWithinRange && this.rightIsWithinRange && this.downIsWithinRange) {
+            const oneRowDownOneColumnLeft = this.setup[this.row + 1][this.column - 1]
+            const oneRowDownOneColumnRight = this.setup[this.row + 1][this.column + 1]
+            if (currentPosition === oneRowDownOneColumnLeft && currentPosition === oneRowDownOneColumnRight) {
+                return true
+            }
+
+        }
+
+        //           🟦
+        // 🟦   🟦  🟥
+        if (this.downIsWithinRange && this.thirdLeftIsWithinRange) {
+            const oneRowDownTwoColumnsLeft = this.setup[this.row + 1][this.column - 2]
+            const oneRowDownOneColumnLeft = this.setup[this.row + 1][this.column - 1]
+            if (currentPosition === oneRowDownTwoColumnsLeft && currentPosition === oneRowDownOneColumnLeft) {
+                return true
+            }
+
+        }
+
+        // 🟦
+        // 🟥
+        // 🟦
+        // 🟦
         if (this.thirdDownIsWithinRange) {
-            const twoPositionsDown = this.setup[this.row + 2][this.column]
-            const threePositionsDown = this.setup[this.row + 3][this.column]
-            if (currentPosition === twoPositionsDown && currentPosition === threePositionsDown) {
-                return true
-            }
-        }
-
-        if (this.leftIsWithinRange && this.secondDownIsWithinRange) {
-            const downLeft = this.setup[this.row + 1][this.column - 1]
-            const twoPositionsDown = this.setup[this.row + 2][this.column]
-            if (currentPosition === downLeft && currentPosition === twoPositionsDown) {
+            const threeRowsDown = this.setup[this.row + 3][this.column]
+            const twoRowsDown = this.setup[this.row + 2][this.column]
+            if (currentPosition === twoRowsDown && currentPosition === threeRowsDown) {
                 return true
             }
 
-        }
-
-        if (this.rightIsWithinRange && this.secondDownIsWithinRange) {
-            const downRight = this.setup[this.row + 1][this.column + 1]
-            const twoPositionsDown = this.setup[this.row + 2][this.column]
-
-            if (currentPosition === downRight && currentPosition === twoPositionsDown) {
-                return true
-            }
         }
 
         return false
-
     }
 }
