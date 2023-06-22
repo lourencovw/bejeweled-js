@@ -22,6 +22,7 @@ function start() {
     const skewText = new PIXI.Text('INICIAR', FONT_STYLE);
     skewText.x = 250;
     skewText.y = 270;
+    skewText.cursor = 'pointer';
     skewText.interactive = true
     skewText.on('pointerdown', () => {
         app.stage.removeChildren()
