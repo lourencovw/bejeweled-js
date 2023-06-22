@@ -11,6 +11,7 @@ app.ticker.add(() => { TWEEN.update() })
 
 const MATRIX_N = 8
 const ELEMENTS_NUMBER = 5
+const GAME_EXPIRATION_TIME = 30
 
 // START
 start()
@@ -115,7 +116,7 @@ function clock() {
     setInterval(() => {
         counter++
         skewText.text = counter < 10 ? `0${counter}` : `${counter}`
-        if (counter === 30) {
+        if (counter === GAME_EXPIRATION_TIME) {
             app.stage.removeChildren()
             displayRestart()
         }
