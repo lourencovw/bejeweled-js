@@ -127,6 +127,9 @@ function clock() {
 
 function displayRestart(){    
     const restart = new PIXI.Text('RESTART', FONT_STYLE);
+    const totalPoints = new PIXI.Text(`Total points: ${moveMaker.points}`, FONT_STYLE_TOTAL_POINTS);
+    totalPoints.x = 235;
+    totalPoints.y = 230;
     restart.x = 235;
     restart.y = 280;
     restart.cursor = 'pointer';
@@ -137,5 +140,6 @@ function displayRestart(){
         clock()
     });
     app.stage.addChild(restart);   
+    app.stage.addChild(totalPoints);   
 
 }
