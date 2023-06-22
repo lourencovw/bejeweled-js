@@ -1,5 +1,5 @@
 import { DIAMONDS } from "./assets/diamondsTexture.js";
-import { FONT_STYLE } from "./assets/fontStyle.js";
+import { FONT_STYLE, FONT_STYLE_TOTAL_POINTS } from "./assets/fontStyle.js";
 import { MoveChecker } from "./js/MoveChecker.js";
 import { MoveMaker } from "./js/MoveMaker.js";
 import { UserMoves } from "./js/UserMoves.js";
@@ -139,7 +139,7 @@ function displayRestart(){
         initialSetup()
         clock()
     });
-    app.stage.addChild(restart);   
+    app.stage.addChild(restart);  
     app.stage.addChild(totalPoints);   
 
 }
