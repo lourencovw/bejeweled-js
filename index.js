@@ -117,9 +117,23 @@ function clock() {
         skewText.text = counter < 10 ? `0${counter}` : `${counter}`
         if (counter === 30) {
             app.stage.removeChildren()
-            initialSetup();
-            clock()
+            displayRestart()
         }
     }, 1000)
+
+}
+
+function displayRestart(){    
+    const restart = new PIXI.Text('RESTART', FONT_STYLE);
+    restart.x = 235;
+    restart.y = 280;
+    restart.cursor = 'pointer';
+    restart.interactive = true
+    restart.on('pointerdown', () => {
+        app.stage.removeChildren()
+        initialSetup()
+        clock()
+    });
+    app.stage.addChild(restart);   
 
 }
