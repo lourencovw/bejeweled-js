@@ -52,7 +52,7 @@ export class MoveChecker {
             }
 
         }
-        
+
         // 🟦
         // 🟥 🟦
         // 🟦
@@ -64,7 +64,7 @@ export class MoveChecker {
                 return true
             }
         }
-        
+
         // 🟦
         // 🟦
         // 🟥 🟦
@@ -81,7 +81,7 @@ export class MoveChecker {
 
     right() {
         const currentPosition = this.color
-        
+
         // 🟦 🟥 🟦 🟦
         if (this.thirdRightIsWithinRange) {
             const twoPositionsAhead = this.setup[this.row][this.column + 2]
@@ -121,7 +121,6 @@ export class MoveChecker {
         if (this.secondDownIsWithinRange && this.rightIsWithinRange) {
             const oneRowDownOneColumnRight = this.setup[this.row + 1][this.column + 1]
             const twoRowsDownOneColumnRight = this.setup[this.row + 2][this.column + 1]
-
             if (currentPosition === twoRowsDownOneColumnRight && currentPosition === oneRowDownOneColumnRight) {
                 return true
             }
@@ -132,11 +131,10 @@ export class MoveChecker {
 
     up() {
         const currentPosition = this.color
-        
         // 🟦
         // 🟦
         // 🟥
-        // 🟦        
+        // 🟦 
         if (this.thirdUpIsWithinRange) {
             const twoRowsUp = this.setup[this.row - 2][this.column]
             const threeRowsUp = this.setup[this.row - 3][this.column]
@@ -150,6 +148,7 @@ export class MoveChecker {
         if (this.leftIsWithinRange && this.upIsWithinRange && this.rightIsWithinRange) {
             const upLeft = this.setup[this.row - 1][this.column - 1]
             const upRight = this.setup[this.row - 1][this.column + 1]
+
             if (currentPosition === upLeft && currentPosition === upRight) {
                 return true
             }
@@ -172,7 +171,6 @@ export class MoveChecker {
         if (this.secondLeftIsWithinRange && this.upIsWithinRange) {
             const upLeft = this.setup[this.row - 1][this.column - 1]
             const oneRowUpTwoColumnsLeft = this.setup[this.row - 1][this.column - 2]
-
             if (currentPosition === upLeft && currentPosition === oneRowUpTwoColumnsLeft) {
                 return true
             }
@@ -183,8 +181,8 @@ export class MoveChecker {
 
     down() {
         const currentPosition = this.color
-        
-        
+
+
         // 🟦
         // 🟥 🟦 🟦
         if (this.secondRightIsWithinRange && this.downIsWithinRange) {
@@ -206,8 +204,8 @@ export class MoveChecker {
 
         }
 
-        //           🟦
-        // 🟦   🟦  🟥
+        //          🟦
+        // 🟦  🟦  🟥
         if (this.downIsWithinRange && this.thirdLeftIsWithinRange) {
             const oneRowDownTwoColumnsLeft = this.setup[this.row + 1][this.column - 2]
             const oneRowDownOneColumnLeft = this.setup[this.row + 1][this.column - 1]
