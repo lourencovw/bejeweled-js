@@ -91,7 +91,6 @@ function mount(setup) {
         for (let column = 0; column < MATRIX_N; column++) {
             const value = setup[row][column]
             const diamond = new PIXI.Sprite(DIAMONDS[value]);
-            const moveChecker = new MoveChecker(row, column, setup, MATRIX_N);
 
             diamond.interactive = true;
             diamond.buttonMode = true;
