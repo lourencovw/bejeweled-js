@@ -12,6 +12,7 @@ app.ticker.add(() => { TWEEN.update() })
 const MATRIX_N = 8
 const ELEMENTS_NUMBER = 5
 const GAME_EXPIRATION_TIME = 30
+let moveMaker;
 
 // START
 start()
@@ -41,7 +42,7 @@ function initialSetup() {
     }
 
     const setup = mount(initialSetup);
-    const moveMaker = new MoveMaker(setup, MATRIX_N, DIAMONDS, app);
+    moveMaker = new MoveMaker(setup, MATRIX_N, DIAMONDS, app);
 
     new UserMoves(moveMaker)
 }
