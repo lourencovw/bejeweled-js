@@ -1,5 +1,4 @@
 import { FONT_STYLE } from "../assets/fontStyle.js"
-import { app } from "../index.js"
 
 export class MoveMaker {
     constructor(setup, matrixSize, diamonds, app) {
@@ -118,7 +117,6 @@ export class MoveMaker {
     rearrangeVertically(row, col, counter) {
         row = row + counter - 3
         while (row >= 0) {
-            console.log(row, col);
             const targetY = this.setup[row][col].y;  // Calculate the target Y position
             if (row - counter < 0) {
                 const color = this.getRandomColor();
