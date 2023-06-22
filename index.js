@@ -20,9 +20,9 @@ start()
 
 // FUNCTIONS
 function start() {
-    const skewText = new PIXI.Text('INICIAR', FONT_STYLE);
-    skewText.x = 250;
-    skewText.y = 270;
+    const skewText = new PIXI.Text('START', FONT_STYLE);
+    skewText.x = 260;
+    skewText.y = 280;
     skewText.cursor = 'pointer';
     skewText.interactive = true
     skewText.on('pointerdown', () => {
