@@ -1,8 +1,9 @@
-import { DIAMONDS } from "./assets/diamondsTexture.js";
-import { FONT_STYLE, FONT_STYLE_TOTAL_POINTS } from "./assets/fontStyle.js";
-import { MoveChecker } from "./js/MoveChecker.js";
-import { MoveMaker } from "./js/MoveMaker.js";
-import { UserMoves } from "./js/UserMoves.js";
+import { DIAMONDS } from "../assets/diamondsTexture.js";
+import { FONT_STYLE, FONT_STYLE_TOTAL_POINTS } from "../assets/fontStyle.js";
+import { MoveChecker } from "../js/MoveChecker.js";
+import { MoveMaker } from "../js/MoveMaker.js";
+import { UserMoves } from "../js/UserMoves.js";
+import { displayStartAnimation } from "./displayStartAnimation.js";
 
 export const app = new PIXI.Application({ width: 640, height: 640 });
 document.body.appendChild(app.view);
@@ -13,7 +14,7 @@ const MATRIX_N = 8
 const ELEMENTS_NUMBER = 5
 const GAME_EXPIRATION_TIME = 30
 let moveMaker;
-
+export const  stage = app.stage
 // START
 start()
 
@@ -21,6 +22,7 @@ start()
 
 // FUNCTIONS
 function start() {
+    displayStartAnimation(app)
     const skewText = new PIXI.Text('START', FONT_STYLE);
     skewText.x = 260;
     skewText.y = 280;
@@ -125,7 +127,8 @@ function clock() {
 
 }
 
-function displayRestart(){    
+function displayRestart(){        
+    displayStartAnimation(app)
     const restart = new PIXI.Text('RESTART', FONT_STYLE);
     const totalPoints = new PIXI.Text(`Total points: ${moveMaker.points}`, FONT_STYLE_TOTAL_POINTS);
     totalPoints.x = 235;

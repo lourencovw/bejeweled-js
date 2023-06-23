@@ -1,4 +1,5 @@
 import { MoveChecker } from "./MoveChecker.js";
+import { stage } from "./index.js";
 
 export class UserMoves {
     constructor(moveMaker) {
@@ -23,8 +24,10 @@ export class UserMoves {
         if (!Array.isArray(this.currentPointerUp) || !Array.isArray(this.currentPointerDown)) {
             return
         }
-        if(this.moveDiamonds()) {
+        if (this.moveDiamonds()) {
             this.moveMaker.start(this.currentPointerDown)
+        } else {
+            this.shakeDiamonds()
         }
     }
 
@@ -65,7 +68,7 @@ export class UserMoves {
             }
         }
 
-        
+
         if (isColEqual) {
             const isUp = up[0] - down[0] < 0
             const isDown = up[0] - down[0] > 0
@@ -85,7 +88,7 @@ export class UserMoves {
             }
         }
         return false
-        
+
     }
 
     moveUp() {
@@ -95,10 +98,10 @@ export class UserMoves {
         const finalColor = this.moveMaker.setup[row - 1][col].value
 
         this.moveMaker.setup[row][col].texture = this.moveMaker.diamonds[finalColor]
-        this.moveMaker.setup[row - 1 ][col].texture = this.moveMaker.diamonds[initColor]
+        this.moveMaker.setup[row - 1][col].texture = this.moveMaker.diamonds[initColor]
 
         this.moveMaker.setup[row][col].value = finalColor
-        this.moveMaker.setup[row - 1 ][col].value = initColor
+        this.moveMaker.setup[row - 1][col].value = initColor
 
     }
 
@@ -109,10 +112,10 @@ export class UserMoves {
         const finalColor = this.moveMaker.setup[row + 1][col].value
 
         this.moveMaker.setup[row][col].texture = this.moveMaker.diamonds[finalColor]
-        this.moveMaker.setup[row + 1 ][col].texture = this.moveMaker.diamonds[initColor]
+        this.moveMaker.setup[row + 1][col].texture = this.moveMaker.diamonds[initColor]
 
         this.moveMaker.setup[row][col].value = finalColor
-        this.moveMaker.setup[row + 1 ][col].value = initColor
+        this.moveMaker.setup[row + 1][col].value = initColor
 
     }
 
@@ -120,13 +123,13 @@ export class UserMoves {
         const row = this.currentPointerDown[0]
         const col = this.currentPointerDown[1]
         const initColor = this.moveMaker.setup[row][col].value
-        const finalColor = this.moveMaker.setup[row ][col+ 1].value
+        const finalColor = this.moveMaker.setup[row][col + 1].value
 
         this.moveMaker.setup[row][col].texture = this.moveMaker.diamonds[finalColor]
-        this.moveMaker.setup[row ][col+ 1 ].texture = this.moveMaker.diamonds[initColor]
+        this.moveMaker.setup[row][col + 1].texture = this.moveMaker.diamonds[initColor]
 
         this.moveMaker.setup[row][col].value = finalColor
-        this.moveMaker.setup[row ][col + 1].value = initColor
+        this.moveMaker.setup[row][col + 1].value = initColor
 
     }
 
@@ -134,16 +137,25 @@ export class UserMoves {
         const row = this.currentPointerDown[0]
         const col = this.currentPointerDown[1]
         const initColor = this.moveMaker.setup[row][col].value
-        const finalColor = this.moveMaker.setup[row ][col- 1].value
+        const finalColor = this.moveMaker.setup[row][col - 1].value
 
         this.moveMaker.setup[row][col].texture = this.moveMaker.diamonds[finalColor]
-        this.moveMaker.setup[row ][col -1 ].texture = this.moveMaker.diamonds[initColor]
+        this.moveMaker.setup[row][col - 1].texture = this.moveMaker.diamonds[initColor]
 
         this.moveMaker.setup[row][col].value = finalColor
-        this.moveMaker.setup[row ][col - 1].value = initColor
+        this.moveMaker.setup[row][col - 1].value = initColor
 
     }
 
+    shakeDiamonds() {
+        for (let row = 0; row < this.matrixSize; row++) {
+            for (let col = 0; col < this.matrixSize; col++) {
+                const onComplete = () => this.moveMaker.setup[row][col].rotation = 0
+                TweenMax
+                .to(this.moveMaker.setup[row][col], 0.1, {rotation:"+=20", onComplete , yoyo:true, repeat:2})
+            }
+        }
+    }
 
 
 }

@@ -6,7 +6,7 @@ export class MoveMaker {
         this.matrixSize = matrixSize
         this.diamonds = diamonds
         this.readyForUserMove = false
-        this.duration = 200
+        this.duration = 100
         this.start()
 
         // Create points message
